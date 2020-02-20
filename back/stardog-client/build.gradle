@@ -1,0 +1,53 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+group 'com.stardog.examples'
+version '1.0-SNAPSHOT'
+
+repositories {
+    maven { url "http://maven.stardog.com" }
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    // Core Dependencies
+    compile ('com.complexible.stardog:client-http:6.1.0')
+    compile ('com.stardog:stardog-spring:6.1.1')
+    compile "com.complexible.stardog:server:6.1.0"
+
+    compile ('org.springframework:spring-core:4.3.10.RELEASE')
+    compile ('org.springframework:spring-beans:4.3.10.RELEASE')
+    compile ('org.springframework:spring-context:4.3.10.RELEASE')
+    compile ('org.springframework:spring-tx:4.3.10.RELEASE')
+    /*compile ('org.springframework.boot:spring-boot-starter') {
+        exclude module : 'spring-boot-starter-logging'
+    } */   
+    compile ('org.springframework.boot:spring-boot-starter-web:2.1.9.RELEASE'){
+        exclude module : 'spring-boot-starter-logging'
+    }
+    compile ('org.slf4j:slf4j-api:1.6.1')
+    compile ('org.slf4j:slf4j-nop:1.7.25')
+    
+    compile('org.apache.logging.log4j:log4j-api:2.12.1')
+    compile('org.apache.logging.log4j:log4j-core:2.12.1')
+    
+    // https://mvnrepository.com/artifact/org.semanticweb.owlapi/owlapi
+	compile "net.sourceforge.owlapi:owlapi-api:5.1.0"
+	compile "net.sourceforge.owlapi:owlapi-impl:5.1.0"
+	compile "net.sourceforge.owlapi:owlapi-parsers:5.1.0"
+	compile "net.sourceforge.owlapi:owlapi-oboformat:5.1.0"
+	compile "net.sourceforge.owlapi:owlapi-tools:5.1.0"
+	compile "net.sourceforge.owlapi:owlapi-rio:5.1.0"
+	compile "net.sourceforge.owlapi:owlapi-apibinding:5.1.0"
+	compile "net.sourceforge.owlapi:owlapi-distribution:5.1.0"
+	
+
+    
+}
+
+/*configurations {
+    all*.exclude module : 'spring-boot-starter-logging'
+}*/
+
+mainClassName = "com.stardog.examples.StardogSpringClient"

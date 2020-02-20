@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Mapeamento</title>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+        <!-- Script para criacao de pontos -->
+        <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
+        <script src="web-files/js/map_drawer.js"></script>
+        <script src="web-files/js/json_to_csv.js"></script>
+        <script src="web-files/js/FileSaver.js"></script>
+        <script src="web-files/js/custom.js?v=0.0.0.1"></script>
+
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="web-files/css/custom.css">
+
+
+    </head>
+
+    <body onload='initMapConfig("map");'>
+        <section class="login-block">
+            <div class="containe ml-3 ">
+                <div class="row">
+                    <div class="col-md-3 login-sec">
+                        <h2 class="text-center">Sistema de Monitoramento do Rio Doce</h2>
+
+                        <div class="btn-group mb-2 text-center" role="group" aria-label="Modo de Visualização">
+                          <button id="view_map" type="button" class="btn btn-secondary active">Mapa</button>
+                          <button id="view_table" type="button" class="btn btn-secondary">Tabela</button>
+                        </div>
+
+                        <form class="login-form" id="filter_form" name="filter_form">
+
+                            <h5>Propriedades da medição:</h5>
+                            <div id="measurementProperties"></div>
+
+                            <br>
+                            <div class="form-group" id="measurementParties">
+                              <h5 for="measurementPartiesSelect">Responsável pela medida:</h5>
+                              <select class="form-control" name="measurementPartiesSelect" id="measurementPartiesSelect" required>
+                                <option value="">Selecione uma opção...</option>
+                              </select>
+                            </div>
+
+
+                            <div class="form-group" id="firstDateDiv">
+                                <label for="example-date-input"><b>Data Inicial:</b></label>
+                                <input class="form-control" type="date" value="2019-01-12" required name="firstDateInput" id="firstDateInput">
+
+                                <small id="show_hide_second_date"><i>Clique <a>aqui</a> para adicionar intervalo de datas</i></small>
+                            </div>
+
+                            <div class="form-group" id="secondDateDiv" style="display: one;">
+                                <label for="example-date-input"><b>Data Final:</b></label>
+                                <input class="form-control" type="date" name="secondDateInput" id="secondDateInput">
+                            </div>
+
+                            <div class="form-group text-right">
+                              <button type="submit" class="btn btn-info"><i class="fa fa-send"></i> Enviar</button>
+                            </div>
+                        </form>
+
+                        <p>Outra opções:</p>
+                        <div class="text-center">
+                          <button id="export_to_csv" type="button" class="btn btn-info mb-3"><i class="fa fa-file"></i> Exportar Planilha</button>
+                          <button id="export_to_owl" type="button" class="btn btn-info mb-3"><i class="fa fa-map-signs"></i> Exportar OWL</button>
+                        </div>
+
+                        <div class="copy-text">Pós Graduação em Conectividade e Tecnologias da Informação - IFES Campus Colatina</div>
+                    </div>
+
+                    <div class="col-md-9 banner-sec">
+                      <div id="map"></div>
+                      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxnWhzMTHqDU7mA78hcuWIpSAqnb7Rzuo"></script>
+                      <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3760.2346514514893!2d-40.649858685479295!3d-19.531536931084826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDMxJzUzLjYiUyA0MMKwMzgnNTEuNiJX!5e0!3m2!1spt-BR!2sbr!4v1562020392606!5m2!1spt-BR!2sbr" width="100%" height="600px" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+
+                      <div id="divTable" style="display: none;">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Localização</th>
+                              <th scope="col">Data</th>
+                              <th scope="col">Responsável</th>
+                              <th scope="col">Propriedade</th>
+                              <th scope="col">Valor</th>
+                            </tr>
+                          </thead>
+                          <tbody id="divTableBody">
+                            <tr>
+                              <td>Nenhum dado encontrado.</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+                </div>
+        </section>
+
+    </body>
+</html>
