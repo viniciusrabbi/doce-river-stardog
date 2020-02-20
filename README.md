@@ -1,2 +1,12 @@
-# doce-river-stardog
-A front-end with map and table filter about Doce's river data stored in a Stardog triplestore
+# Foobar
+
+Doce River Stardog Project
+
+## Installation
+
+Download the project, import on Eclipse and syncronize the Gradle
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
